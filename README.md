@@ -17,8 +17,9 @@ ClashPoint is the closest equivalent to an instant action feature in Arma 3. It'
 
 ## Media
 
-[Trailer](https://www.youtube.com/watch?v=YxRt2BQVRf0)
-[Gameplay](https://www.youtube.com/watch?v=GmdZLsb8UNM)
+### [Trailer](https://www.youtube.com/watch?v=YxRt2BQVRf0)
+
+### [Gameplay](https://www.youtube.com/watch?v=GmdZLsb8UNM)
 
 ### [BIS Forums](https://forums.bistudio.com/topic/178524-spmp-clashpoint)
 
