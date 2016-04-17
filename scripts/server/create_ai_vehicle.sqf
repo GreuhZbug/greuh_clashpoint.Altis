@@ -5,7 +5,7 @@ _vehicles = [];
 
 if ( isNil "managed_vehicles" ) then { managed_vehicles = [] };
 
-if (_side == WEST) then { 
+if (_side == WEST) then {
 	_basepos = getpos blufor_base;
 	_vehicles = blufor_vehicles;
 } else {
@@ -26,7 +26,7 @@ _veh = _vehicleclass createVehicle _pos;
 _veh setpos _pos;
 _veh setVectorUp surfaceNormal position _veh;
 createVehicleCrew _veh;
-uiSleep 0.1;
+sleep 0.1;
 _grp = (group ((crew _veh) select 0));
 _veh setVehicleLock "LOCKEDPLAYER";
 managed_vehicles = managed_vehicles + [_veh];

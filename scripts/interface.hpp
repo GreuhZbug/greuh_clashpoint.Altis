@@ -322,8 +322,6 @@ class RscTitles
    };
 
 
-
-
    class blank
    {
       name = "blank";

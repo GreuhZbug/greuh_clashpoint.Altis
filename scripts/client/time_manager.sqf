@@ -2,7 +2,7 @@ waitUntil { !isNil "server_date" && !isNil "current_roundstate" && !isNil "serve
 
 while { true } do {
 	waitUntil { current_roundstate == 0 };
-	uiSleep 1.5;
+	sleep 1.5;
 	setDate server_date;
 	0 setOvercast server_weather;
 	_fog = 0;
@@ -13,7 +13,7 @@ while { true } do {
 		_fog = 0.7;
 	};
 	0 setFog _fog;
-	uisleep 0.5;
+	sleep 0.5;
 	forceWeatherChange;
 	waitUntil { current_roundstate == 1};
 }

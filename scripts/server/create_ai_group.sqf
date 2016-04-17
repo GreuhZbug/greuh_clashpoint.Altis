@@ -1,9 +1,14 @@
-_grp = _this select 0;
-_reinforcements = _this select 1;
-_side = side _grp;
-_basepos = [];
-_pos = [];
-_squad = [];
+params [ "_grp", "_reinforcements" ];
+
+private _side = side _grp;
+private _basepos = [];
+private _pos = [];
+private _squad = [];
+private _units_to_spawn = 8;
+
+if ((_side == WEST && flashpoint_side == "blufor") || (_side == EAST && flashpoint_side == "opfor")) then {
+	_units_to_spawn = 5;
+};
 
 if ( _reinforcements ) then {
 	player_count = 0;
@@ -11,7 +16,7 @@ if ( _reinforcements ) then {
 	player_count = { isPlayer _x && side _x == _side } count allUnits;
 };
 
-if (_side == WEST) then { 
+if (_side == WEST) then {
 	_basepos = getpos blufor_base;
 	_squad = blufor_squad;
 } else {
@@ -27,10 +32,12 @@ if ( count _pos == 0 ) then {
 	_pos = [(_basepos select 0) + (_spawndistance * (cos _spawnangle)), (_basepos select 1) + (_spawndistance * (sin _spawnangle))];
 };
 
-if ( player_count <= 14 ) then {
+_units_to_spawn = _units_to_spawn - (floor (player_count / 2));
+
+if ( _units_to_spawn > 0 ) then {
 
 	_idx = 0;
-	while { _idx < (8 - (floor (player_count / 2))) } do {
+	while { _idx < _units_to_spawn } do {
 		_rank = "private";
 		if ( _idx == 0 ) then { _rank = "lieutenant"; };
 		if ( _idx == 1 ) then { _rank = "sergeant"; };

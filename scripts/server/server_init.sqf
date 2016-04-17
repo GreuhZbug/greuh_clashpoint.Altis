@@ -1,5 +1,3 @@
-[] execVM "scripts\server\fetch_params.sqf";
-
 game_manager = compile preprocessFileLineNumbers "scripts\server\game_manager.sqf";
 init_bases = compile preprocessFileLineNumbers "scripts\server\init_bases.sqf";
 setup_bases = compile preprocessFileLineNumbers "scripts\server\setup_bases.sqf";
@@ -17,9 +15,11 @@ waypoint_logic =  compile preprocessFileLineNumbers "scripts\server\waypoint_log
 create_civ = compile preprocessFileLineNumbers "scripts\server\create_civ.sqf";
 add_civ_waypoints = compile preprocessFileLineNumbers "scripts\server\add_civ_waypoints.sqf";
 building_defence_ai = compile preprocessFileLineNumbers "scripts\server\building_defence_ai.sqf";
+regroup_units = compile preprocessFileLineNumbers "scripts\server\regroup_units.sqf";
 
 [] spawn ai_spawner;
 [] spawn game_manager;
 [] spawn scan_skill;
 [] spawn cas_manager;
 [] spawn reinforcement_manager;
+[] spawn regroup_units;

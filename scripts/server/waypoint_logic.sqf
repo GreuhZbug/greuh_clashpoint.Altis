@@ -5,7 +5,7 @@ if(_side == EAST) then {
 	_basepos = base_position_opfor;
 };
 
-uiSleep 5;
+sleep 5;
 
 while { (leader _grp) distance _basepos < 60 } do {
 	while {(count (waypoints _grp)) != 0} do {deleteWaypoint ((waypoints _grp) select 0);};
@@ -13,18 +13,18 @@ while { (leader _grp) distance _basepos < 60 } do {
 	_waypoint = _grp addWaypoint [getpos flashpoint, 200];
 	_waypoint setWaypointType "MOVE";
 	_waypoint setWaypointBehaviour "AWARE";
-	_waypoint setWaypointCombatMode "RED"; 
+	_waypoint setWaypointCombatMode "RED";
 	_waypoint setWaypointCompletionRadius 10;
 	_waypoint = _grp addWaypoint [getpos flashpoint, 5];
 	_waypoint setWaypointType "MOVE";
 	_waypoint setWaypointBehaviour "AWARE";
-	_waypoint setWaypointCombatMode "YELLOW"; 
+	_waypoint setWaypointCombatMode "YELLOW";
 	_waypoint setWaypointCompletionRadius 3;
 	_waypoint = _grp addWaypoint [getpos flashpoint, 25];
 	_waypoint setWaypointType "MOVE";
 	_waypoint setWaypointBehaviour "COMBAT";
-	_waypoint setWaypointCombatMode "GREEN"; 
+	_waypoint setWaypointCombatMode "GREEN";
 	_waypoint setWaypointCompletionRadius 3;
 	_grp allowFleeing 0;
-	uiSleep 60;
+	sleep 60;
 };

@@ -16,7 +16,7 @@ while { true } do {
 		sleep 1;
 	};
 	force_respawn = false;
-	uiSleep 0.2;
+	sleep 0.2;
 	_basepos = base_position_blufor;
 	if (playerside == EAST ) then {
 		_basepos = base_position_opfor;

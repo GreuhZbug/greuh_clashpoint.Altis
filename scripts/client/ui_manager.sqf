@@ -40,8 +40,8 @@ if ( side player == WEST ) then {
 
 while { true } do {
 
-	if ( current_roundstate != 1 ) then { 
-		_firstloop = true; 
+	if ( current_roundstate != 1 ) then {
+		_firstloop = true;
 		_timer5mb = true;
 		_timer3mb = true;
 		_timer2mb = true;
@@ -57,8 +57,8 @@ while { true } do {
 		};
 	};
 
-	if ( current_roundstate == 1 ) then { 
-		
+	if ( current_roundstate == 1 ) then {
+
 		"flashpoint_marker" setMarkerPosLocal getpos flashpoint;
 		"base_marker" setMarkerPosLocal getpos _base;
 		"base_marker" setMarkerColorLocal _color;
@@ -77,7 +77,7 @@ while { true } do {
 			_old_flashpoint_side = flashpoint_side;
 			switch (flashpoint_side) do {
 				case "blufor" :
-				{ 
+				{
 					side_color = [0,0,1,1];
 					"flashpoint_marker" setMarkerColorLocal "ColorBLUFOR";
 					_tasktype = "TaskSucceeded";
@@ -85,7 +85,7 @@ while { true } do {
 					[_tasktype,["",localize "STR_BLUFOR_capture"]] call BIS_fnc_showNotification;
 				};
 				case "opfor" :
-				{ 
+				{
 					side_color = [1,0,0,1];
 					"flashpoint_marker" setMarkerColorLocal "ColorOPFOR";
 					_tasktype = "TaskSucceeded";
@@ -93,7 +93,7 @@ while { true } do {
 					[_tasktype,["",localize "STR_OPFOR_capture"]] call BIS_fnc_showNotification;
 				};
 				case "res" :
-				{ 
+				{
 					side_color =  [0,1,0,1];
 					"flashpoint_marker" setMarkerColorLocal "ColorIndependent";
 					if ( _firstswitch  ) then {
@@ -105,7 +105,7 @@ while { true } do {
 				};
 			};
 		};
-		
+
 		if ( blufor_timer <= 300 && _timer5mb ) then {
 			["TaskUpdatedIcon",["",format ["%1 %2","5",localize "STR_BLUFOR_TIMER"]]] call BIS_fnc_showNotification;
 			_timer5mb = false;
@@ -146,7 +146,7 @@ while { true } do {
 			["TaskUpdatedIcon",["",format ["%1 %2","20",localize "STR_OPFOR_TIMERSECS"]]] call BIS_fnc_showNotification;
 			_timer20so = false;
 		};
-		
+
 		if ( isNull ((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (101)) && _overlayshown ) then { _overlayshown = false };
 		if ( alive player && !dialog && ! _overlayshown) then {
 			cutRsc["statusoverlay", "PLAIN", 1];
@@ -167,7 +167,7 @@ while { true } do {
 			((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (105)) ctrlShow _showblufor;
 			((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (104)) ctrlShow _showopfor;
 			((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (106)) ctrlShow _showopfor;
-			
+
 			_controls = [201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,200];
 			_idx = 0;
 			while { _idx < 20 } do {
@@ -194,9 +194,9 @@ while { true } do {
 					case RESISTANCE : { _textcolortarget = "#00c000"; };
 					default { _textcolortarget = "#b0b0b0"; };
 				};
-				
+
 				_textline = parseText "";
-				if((_current_killspam select 0) > 0) then { 
+				if((_current_killspam select 0) > 0) then {
 					_textline = parseText format["<t align='right'><t color='%1'>%2</t> <t color='%3'>[%4]</t> <t color='%5'>%6</t></t>",_textcolorkiller,_namekiller,_colorweapon,_nameweapon,_textcolortarget,_nametarget];
 				};
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (_controls select _idx)) ctrlSetStructuredText  _textline;
@@ -208,5 +208,5 @@ while { true } do {
 		};
 		_old_flashpoint_side = flashpoint_side;
 	};
-	uiSleep 0.5;
+	sleep 0.5;
 };

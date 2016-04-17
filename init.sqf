@@ -1,6 +1,7 @@
 
 enableSaving [ false, false ];
 
+call compileFinal preprocessFileLineNumbers "scripts\fetch_params.sqf";
 call compileFinal preprocessFileLineNumbers "scripts\functions\init_functions.sqf";
 call compileFinal preprocessFileLineNumbers "classnames.sqf";
 
