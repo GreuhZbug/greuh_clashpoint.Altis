@@ -1,6 +1,4 @@
-waitUntil { !isNil "param_revive" };
-
-if ( param_revive == 1 ) exitWith {};
+if ( param_revive == 0 ) exitWith {};
 
 //
 // Farooq's Revive 1.5
@@ -11,7 +9,11 @@ if ( param_revive == 1 ) exitWith {};
 //------------------------------------------//
 
 // Seconds until unconscious unit bleeds out and dies. Set to 0 to disable.
-FAR_BleedOut = 60;
+if ( isMultiplayer ) then {
+	FAR_BleedOut = 150;
+} else {
+	FAR_BleedOut = 30;
+};
 
 // Enable teamkill notifications
 FAR_EnableDeathMessages = true;
@@ -55,8 +57,6 @@ if (isDedicated) exitWith {};
 	if (FAR_MuteACRE) then
 	{
 		[] spawn FAR_Mute_ACRE;
-
-		hintSilent format["Farooq's Revive %1 is initialized.%2", SCRIPT_VERSION, "\n\n Note: Unconscious units will not be able to use radio, hear other people or use proximity chat"];
 	};
 
 	// Event Handlers

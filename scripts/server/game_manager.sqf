@@ -11,7 +11,7 @@ _firstround = true;
 
 if ( isNil "managed_vehicles" ) then { managed_vehicles = [] };
 
-while { true } do {	
+while { true } do {
 
 	current_roundstate = 0; publicVariable "current_roundstate";
 	sleep 1;
@@ -44,7 +44,7 @@ while { true } do {
 			_weather = 0.25;
 		};
 		server_weather = _weather; publicVariable "server_weather";
-		
+
 		if(isDedicated) then {
 			0 setOvercast server_weather;
 			_fog = 0;
@@ -58,50 +58,50 @@ while { true } do {
 			forceWeatherChange;
 		};
 	};
-	
-	{ 
-		if ( !isPlayer _x ) then { 
+
+	{
+		if ( !isPlayer _x ) then {
 			deletevehicle _x;
-			_x removeAllEventHandlers "MPKilled"; 
-		}; 
+			_x removeAllEventHandlers "MPKilled";
+		};
 	} foreach allunits;
 	{ deletevehicle _x; } foreach managed_vehicles;
 	managed_vehicles = [];
 	[] call setup_bases;
 	sleep 2;
-	
+
 	current_roundstate = 1; publicVariable "current_roundstate";
-	
+
 	force_respawn = true; publicVariable "force_respawn";
 	blufor_timer = param_round_duration; publicVariable "blufor_timer";
 	opfor_timer = param_round_duration; publicVariable "opfor_timer";
 	flashpoint_side = "res"; publicVariable "flashpoint_side";
-	
+
 	while { blufor_timer > 0 && opfor_timer > 0 } do {
 		if ( flashpoint_side == "blufor" ) then { blufor_timer = blufor_timer - 1; publicVariable "blufor_timer"; };
 		if ( flashpoint_side == "opfor" ) then { opfor_timer = opfor_timer - 1; publicVariable "opfor_timer"; };
-		uiSleep 1;
+		sleep 1;
 	};
-	
+
 	current_roundstate = 2; publicVariable "current_roundstate";
-	
-	if ( blufor_timer < opfor_timer) 
-	then { 
+
+	if ( blufor_timer < opfor_timer)
+	then {
 		winner = "blufor"; publicVariable "winner";
 		blufor_score = blufor_score + 1; publicVariable "blufor_score";
 	} else {
 		winner = "opfor"; publicVariable "winner";
 		opfor_score = opfor_score + 1; publicVariable "opfor_score";
 	};
-	
-	{ 
-		if ( !isPlayer _x ) then { 
-			_x removeAllEventHandlers "MPKilled"; 
+
+	{
+		if ( !isPlayer _x ) then {
+			_x removeAllEventHandlers "MPKilled";
 			deletevehicle _x;
-		}; 
+		};
 	} foreach allunits;
-	
+
 	base_is_ready = false; publicVariable "base_is_ready";
-	
+
 	sleep 13;
 };

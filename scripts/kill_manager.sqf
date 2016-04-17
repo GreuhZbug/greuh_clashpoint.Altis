@@ -1,4 +1,4 @@
-_cleanup_delay = 600; 
+_cleanup_delay = 600;
 
 _unit = _this select 0;
 _killer = _this select 1;
@@ -11,10 +11,10 @@ if ( !isDedicated ) then {
 	};
 };
 
-uiSleep 1;
+sleep 1;
 
 if( isServer && !isplayer _unit) then {
-	uiSleep 3;
+	sleep 3;
 	if ( isNil "west_dumpgroup" ) then { west_dumpgroup = createGroup WEST; };
 	if ( isNil "east_dumpgroup" ) then { east_dumpgroup = createGroup EAST; };
 	if ( side (group _unit) == WEST ) then { [_unit] join west_dumpgroup };

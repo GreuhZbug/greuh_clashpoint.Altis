@@ -3,7 +3,7 @@ while { true } do {
 		if ( !isPlayer _x && local _x ) then {
 			[_x] call setskills;
 		};
-		uiSleep 0.1;
+		sleep 0.1;
 	} foreach allUnits;
-	uiSleep 0.2;
+	sleep 0.2;
 };

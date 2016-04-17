@@ -1,3 +1,5 @@
+GRLIB_replace_ai = false;
+
 ////////////////////////////////////////////////
 // Player Actions
 ////////////////////////////////////////////////
@@ -20,7 +22,7 @@ FAR_HandleDamage_EH =
 {
 
 	params [ "_unit", "_selectionName", "_amountOfDamage", "_killer", "_projectile", "_hitPartIndex" ];
-	private [ "_isUnconscious" ];
+	private [ "_isUnconscious", "_olddamage", "_damageincrease", "_vestarmor", "_vest_passthrough", "_vestobject", "_helmetarmor",  "_helmet_passthrough", "_helmetobject" ];
 
 	_isUnconscious = _unit getVariable "FAR_isUnconscious";
 
@@ -29,15 +31,13 @@ FAR_HandleDamage_EH =
 		_unit setDamage 0.6;
 		_unit allowDamage false;
 		_amountOfDamage = 0;
+		[_unit, _killer] spawn FAR_Player_Unconscious;
 
 		public_killspam = [_unit, _killer];
 		publicVariable "public_killspam";
-
-		[_unit, _killer] spawn FAR_Player_Unconscious;
 	};
 
 	_amountOfDamage
-
 };
 
 ////////////////////////////////////////////////
@@ -45,9 +45,7 @@ FAR_HandleDamage_EH =
 ////////////////////////////////////////////////
 FAR_Player_Unconscious =
 {
-	private["_unit", "_killer"];
-	_unit = _this select 0;
-	_killer = _this select 1;
+	params [ "_unit", "_killer" ];
 
 	// Death message
 	if (FAR_EnableDeathMessages && !isNil "_killer" && isPlayer _killer && _killer != _unit) then
@@ -129,9 +127,6 @@ FAR_Player_Unconscious =
 
 			while { !isNull _unit && alive _unit && _unit getVariable "FAR_isUnconscious" == 1 && _unit getVariable "FAR_isStabilized" == 0 && (FAR_BleedOut <= 0 || time < _bleedOut) } do
 			{
-				if ( !isMultiplayer ) then {
-					_unit setVariable ["FAR_isStabilized", 1, true];
-				};
 				hintSilent format[localize "STR_BLEEDOUT_MESSAGE" + "\n\n%2", round (_bleedOut - time), call FAR_CheckFriendlies];
 				public_bleedout_message = format [localize "STR_BLEEDOUT_MESSAGE", round (_bleedOut - time)];
 				public_bleedout_timer = round (_bleedOut - time);
@@ -162,11 +157,11 @@ FAR_Player_Unconscious =
 			{
 				// Player got revived
 				_unit setVariable ["FAR_isStabilized", 0, true];
-				if ( isMultiplayer ) then {
+				if( isNil "singleplayer_respawn") then { singleplayer_respawn = false };
+				if ( !(GRLIB_replace_ai || singleplayer_respawn) ) then {
 					sleep 6;
-				} else {
-					sleep 1.5;
 				};
+				singleplayer_respawn = false;
 
 				// Clear the "medic nearby" hint
 				hintSilent "";
@@ -181,8 +176,18 @@ FAR_Player_Unconscious =
 				_unit allowDamage true;
 				_unit setCaptive false;
 
-				_unit playMove "amovppnemstpsraswrfldnon";
-				_unit playMove "";
+				if ( GRLIB_replace_ai ) then {
+					if ( primaryWeapon player == "" ) then {
+						_unit switchMove "";
+					} else {
+						_unit switchMove "AidlPknlMstpSrasWrflDnon_G02";
+					};
+
+					GRLIB_replace_ai = false;
+				} else {
+					_unit playMove "amovppnemstpsraswrfldnon";
+					_unit playMove "";
+				};
 			};
 		}
 		else
@@ -240,7 +245,7 @@ FAR_HandleRevive =
 		{
 			_target enableSimulation true;
 			_target allowDamage true;
-			_target setDamage 0.6;
+			_target setDamage 0.65;
 			_target setCaptive false;
 
 			_target playMove "amovppnemstpsraswrfldnon";
@@ -492,7 +497,7 @@ FAR_CheckFriendlies =
 {
 	private ["_unit", "_units", "_medics", "_hintMsg"];
 
-	_units = nearestObjects [getpos player, ["Man", "Car", "Air", "Ship"], 800];
+	_units = (getpos player) nearEntities [ ["Man", "Car", "Air", "Ship"], 800];
 	_medics = [];
 	_dist = 800;
 	_hintMsg = "";

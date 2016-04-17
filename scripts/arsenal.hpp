@@ -1,4 +1,4 @@
-class liberation_arsenal {
+class arsenal {
 	idd = 5251;
 	movingEnable = false;
 	controlsBackground[] = {};
@@ -139,6 +139,22 @@ class liberation_arsenal {
 		};
 	};
 
+	class RecycleBG {
+		idc = -1;
+		type = CT_STATIC;
+		style = ST_PICTURE;
+		colorText[] = {0.5, 0.4, 0.25, 0.6};
+		colorBackground[] = {0, 0, 0, 1};
+		font = FontM;
+		sizeEx = 0.023;
+		moving = false;
+		text = "res\camo03.jpg";
+		x = (0.17 * safezoneW + safezoneX) - ( 2 * BORDERSIZE);
+		y = (0.1 * safezoneH + safezoneY) - (3 * BORDERSIZE);
+		w = (0.16 * safezoneW) + (4 * BORDERSIZE);
+		h = (0.75 * safezoneH) + (6 * BORDERSIZE);
+	};
+
 	class OuterBG : StdBG{
 		colorBackground[] = COLOR_BROWN;
 		x = (0.17 * safezoneW + safezoneX) - ( 2 * BORDERSIZE);
@@ -222,6 +238,15 @@ class liberation_arsenal {
 		sizeEx = 0.024 * safezoneH;
 		text = $STR_LOAD_PLAYER_LOADOUT;
 		action = "load_from_player = lbCurSel 203;";
+	};
+	class ButtonClose : StdButton{
+		idc = 101;
+		x = 0.315 * safezoneW + safezoneX;
+		w = 0.015 * safezoneW;
+		h = 0.02 * safezoneH;
+		y = 0.095 * safezoneH + safezoneY;
+		text = "X";
+		action = "closeDialog 0";
 	};
 
 };

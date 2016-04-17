@@ -1,10 +1,13 @@
-_grp = createGroup RESISTANCE; 
+_grp = createGroup RESISTANCE;
 { deletevehicle _x } foreach units _grp;
 _soldier = objNull;
 waitUntil { !isNil "homemade_militias" };
 
 _class = "";
-_nb_soldiers = 30;
+_nb_soldiers = 20 * (param_ai_groups / 4);
+if ( _nb_soldiers > 40 ) then {
+	_nb_soldiers = 40;
+};
 _posit = getpos flashpoint;
 
 _helmets = ["H_shemag_olive","H_shemag_khk","H_shemagopen_tan","H_milcap_ocamo"];
@@ -35,7 +38,7 @@ for [ {_idx=0},{_idx< _nb_soldiers},{_idx=_idx+1}] do {
 		_soldier addMagazine (_loadout select 1);
 		_soldier addMagazine (_loadout select 1);
 		_soldier addWeapon (_loadout select 0);
-		
+
 		removeAllPrimaryWeaponItems _soldier;
 		if ((random 100) < 75) then { _soldier addPrimaryWeaponItem "acc_flashlight"; };
 	};
@@ -78,7 +81,7 @@ while {(count (waypoints _grp)) != 0} do {deleteWaypoint ((waypoints _grp) selec
 _waypoint = _grp addWaypoint [getpos flashpoint, 4];
 _waypoint setWaypointType "MOVE";
 _waypoint setWaypointBehaviour "COMBAT";
-_waypoint setWaypointCombatMode "YELLOW"; 
+_waypoint setWaypointCombatMode "YELLOW";
 _waypoint setWaypointCompletionRadius 0;
 
 

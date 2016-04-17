@@ -1,9 +1,10 @@
-_unit = _this select 0;
 if ( isMultiplayer ) then {
-	_unit setDamage 1;
+	player setDamage 1;
 } else {
-	_unit setVariable ["FAR_isUnconscious", 0, true];
+	player setVariable [ "FAR_isUnconscious", 0, true];
 	force_respawn = true;
+	singleplayer_respawn = true;
 	uiSleep 0.2;
-	_unit setDamage 0;
+	player setDamage 0;
+	[] execVM "onPlayerRespawn.sqf";
 };

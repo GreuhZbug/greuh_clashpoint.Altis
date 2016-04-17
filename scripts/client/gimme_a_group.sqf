@@ -1,7 +1,7 @@
-uiSleep 15;
+sleep 15;
 
 while { true } do {
-	
+
 	if ( count (units group player ) == 1 ) then {
 		_bestgrp = grpNull;
 		_bestgrpnumber = -1;
@@ -11,7 +11,7 @@ while { true } do {
 				{
 					if ( vehicle _x != _x ) then { _hasvehicle = true };
 				} foreach units _x;
-				
+
 				if (!_hasvehicle) then {
 					if ( count units _x >_bestgrpnumber ) then {
 						_bestgrpnumber = count units _x;
@@ -25,5 +25,5 @@ while { true } do {
 		};
 	};
 
-	uiSleep 1;
+	sleep 1;
 };

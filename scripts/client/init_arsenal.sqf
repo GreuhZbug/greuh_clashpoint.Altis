@@ -63,5 +63,9 @@ _virtualBackpacks = [];
 [ missionNamespace, true ] call BIS_fnc_addVirtualWeaponCargo;
 [ missionNamespace, true ] call BIS_fnc_addVirtualMagazineCargo;
 [ missionNamespace, true ] call BIS_fnc_addVirtualItemCargo;
-[ missionNamespace, _virtualBackpacks ] call BIS_fnc_addVirtualBackpackCargo;
+if ( param_deployables == 0 ) then {
+	[ missionNamespace, _virtualBackpacks ] call BIS_fnc_addVirtualBackpackCargo;
+} else {
+	[ missionNamespace, true ] call BIS_fnc_addVirtualBackpackCargo;
+};
 

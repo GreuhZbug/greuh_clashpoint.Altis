@@ -133,23 +133,15 @@
 			<Original>FAR revive (incompatible with some mods)</Original>
 			<French>FAR revive (incompatible avec certains mods)</French>
 		</Key>
-		<Key ID="STR_PARAM_REVIVE1">
-			<Original>Enabled</Original>
-			<French>Activé</French>
-		</Key>
-		<Key ID="STR_PARAM_REVIVE2">
-			<Original>Disabled</Original>
-			<French>Désactivé</French>
-		</Key>
 		<Key ID="STR_PARAM_DEPLOYABLES">
 			<Original>Deployable weapons</Original>
 			<French>Armes déployables</French>
 		</Key>
-		<Key ID="STR_PARAM_DEPLOYABLES1">
+		<Key ID="STR_PARAM_ENABLED">
 			<Original>Enabled</Original>
 			<French>Activé</French>
 		</Key>
-		<Key ID="STR_PARAM_DEPLOYABLES2">
+		<Key ID="STR_PARAM_DISABLED">
 			<Original>Disabled</Original>
 			<French>Désactivé</French>
 		</Key>
@@ -196,6 +188,10 @@
             <Original>Successful loadout transfer from %1.</Original>
             <French>Transfer d'équipement réussi depuis %1.</French>
             <German>Erfolgreich Ausrüstung von %1 übertragen.</German>
+        </Key>
+        <Key ID="STR_PARAM_STAMINA">
+            <Original>Stamina</Original>
+            <French>Stamina</French>
         </Key>
 	</Package>
 </Project>
